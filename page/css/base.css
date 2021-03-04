@@ -1,0 +1,88 @@
+/* 基础样式 */
+/* 色块 
+1. #b0ce95
+2. #6a855b
+3. #46776d
+4. #3e563b
+5. #4d584c
+*/
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    background-color: #b0ce95;
+    color: #4d584c;
+    text-align: center;
+}
+
+header {
+    background-color: #6a855b;
+    width: 100%;
+    height: 50px;
+}
+
+.container {
+    position: relative;
+    width: 1170px;
+    height: 50px;
+    margin: 0px auto;
+    /* background: #46776d; */
+}
+
+.title {
+    display: inline-block;
+    float: left;
+    color: #b0ce95;
+    line-height: 50px;
+    margin: 0px 15px;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.menu {
+    float: left;
+}
+.menu li {
+    display: inline-block;
+    float: left;
+    height: 50px;
+    width: 58px;
+    color: #b0ce95;
+    font-size: 18px;
+    line-height: 50px;
+    text-align: center;
+}
+.menu li a {
+    text-decoration: none;
+    color: #b0ce95;
+}
+
+.search input {
+    display: inline-block;
+    position: absolute;
+    height: 22px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    outline: none;
+    border:1px solid #46776d;
+    font-size: 14px;
+    top: 50%;
+    margin-top: -17px;
+    right: 60px;
+}
+.search button {
+    display: inline-block;
+    position: absolute;
+    width: 54px;
+    height: 34px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    top: 50%;
+    margin-top: -17px;
+    outline: none;
+    background: #46776d;
+    color: #b0ce95;
+    right: 0px;
+}
