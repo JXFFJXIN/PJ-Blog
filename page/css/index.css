@@ -1,1 +1,81 @@
 /* 主文件 */
+/* 色块 
+0. #e0f6cd
+1. #b0ce95
+2. #6a855b
+3. #46776d
+4. #3e563b #668f61
+5. #4d584c
+*/
+.everyday{
+    background: #e0f6cd;
+    padding: 5px 10px;
+    font-size: 16px;
+    width: 100%;
+    text-align: left;
+    border-radius: 5px;
+    box-sizing: border-box;
+    box-shadow: 3px 4px 3px #3e563b;
+}
+.everyday::before{
+    font-family: 'Icon';
+    content: "\e122";
+    font-size: 14px;
+    color: #52a74a;
+    position: relative;
+    display: block;
+    height: 0px;
+    top: 3px;
+    left: 65px;
+}
+.everyday span{
+    display: block;
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: #3e563b;
+}
+
+.article_list{
+    width: 100%;
+    display: inline-block;
+}
+.article{
+    background: #e0f6cd;
+    display: inline-block;
+    box-sizing: border-box;
+    width: 100%;
+    border-radius: 5px;
+    box-shadow: 3px 4px 3px #3e563b;
+    overflow: hidden;
+    text-align: left;
+    margin-top: 15px;
+}
+.article_title{
+    display: inline-block;
+    font-size: 18px;
+    text-decoration: none;
+    color: #3e563b;
+    text-align: left;
+    padding: 5px 10px;
+}
+.article_title:hover{
+    color: #668f61;
+    cursor: pointer;
+}
+.article_content{
+    font-size: 14px;
+    color:#668f61;
+    padding: 5px 10px 20px 20px;
+    text-align: left;
+    word-wrap: break-word;
+    word-break: break-word;
+    overflow: hidden;
+}
+.article_footer{
+    color: #e0f6cd;
+    background:#6a855b;
+    font-size: 14px;
+    width: 100%;
+    padding: 5px 20px;
+    box-sizing: border-box;
+}

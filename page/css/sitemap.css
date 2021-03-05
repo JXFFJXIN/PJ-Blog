@@ -1,0 +1,60 @@
+/* 站点地图 */
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+body{
+    background-color: #b0ce95;
+    color: #596e4d;
+}
+
+.title{
+    height: 50px;
+    color: #e0f6cd;
+    background:#6a855b;
+    width: 100%;
+    text-align: center;
+    font-weight: 600;
+    line-height: 50px;
+    font-size: 18px;
+}
+
+.link{
+    background:#e0f6cd;
+    color: #6a855b;
+    padding: 10px 100px;
+    width: 100%;
+    font-size: 14px;
+}
+.link>a{
+    text-decoration: none;
+    color: #6a855b;
+    font-weight: 600;
+}
+.blog_list{
+    width: 100%;
+    padding:10px 100px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #6a855b;
+}
+.blog_list span{
+    display: block;
+    font-size: 16px;
+}
+.blog_list ul{
+    padding: 10px 10px;
+    font-size: 14px;
+    font-weight: 600;
+    width: 100%;
+    margin: 10px auto;
+}
+.blog_list li{
+    list-style: none;
+    margin-top: 5px;
+}
+.blog_list a{
+    text-decoration: none;
+    color: #596e4d;
+}
