@@ -7,6 +7,7 @@
     <title>Blog</title>
     <link rel="stylesheet" href="./css/base.css">
     <link rel="stylesheet" href="./css/index.css">
+    <script src="https://cdn.bootcss.com/vue/2.5.2/vue.min.js"></script>
 </head>
 <body>
     <header>
@@ -26,83 +27,40 @@
     </header>
     <div class="content">
         <div class="content_left">
-            <div class="everyday">
+            <div class="everyday" id="everyday">
                 <span>每日一句</span>
-                <p>sdsdsdsdsdsdsdddddsdsdsddsdsd</p>
-                <p>————————————dddddsdsdsddsdsd</p>
+                <p >{{getContent}}</p>
             </div>
-            <div class="article_list">
-                <div class="article">
-                    <a href="/" class="article_title">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quibusdam, quo.</a>
+            <div class="article_list" id="article_list">
+                <div class="article" v-for="article in articleList" :key="article.id">
+                    <a :href="article.link" class="article_title">{{article.title}}</a>
                     <p class="article_content">
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatibus magnam alias minima dignissimos, laborum voluptate repudiandae id totam odio repellendus! Reprehenderit suscipit dignissimos, ipsa beatae quasi numquam, commodi nesciunt quod explicabo ipsam et? Minus eligendi maxime facere, autem ipsa quo, accusamus, consequuntur aperiam fuga cum reiciendis expedita modi officiis unde.
+                        {{article.content}}
                     </p>
-                    <div class="article_footer">发布于{{key.ctime}} |  浏览({{key.views}}) | Tags：{{key.tags}}</div>
-                </div>
-                <div class="article">
-                    <a href="/" class="article_title">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quibusdam, quo.</a>
-                    <p class="article_content">
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatibus magnam alias minima dignissimos, laborum voluptate repudiandae id totam odio repellendus! Reprehenderit suscipit dignissimos, ipsa beatae quasi numquam, commodi nesciunt quod explicabo ipsam et? Minus eligendi maxime facere, autem ipsa quo, accusamus, consequuntur aperiam fuga cum reiciendis expedita modi officiis unde.
-                    </p>
-                    <div class="article_footer">发布于{{key.ctime}} |  浏览({{key.views}}) | Tags：{{key.tags}}</div>
+                    <div class="article_footer">发布于{{article.date}} |  浏览({{article.views}}) | Tags：{{article.tags}}</div>
                 </div>
             </div>
         </div>
         <div class="content_right">
-            <div class="right_module">
+            <div class="right_module" id="random_tags">
                 <div class="header">随机标签云</div>
-                <a href="/" class="tag">asd</a>
-                <a href="/" class="tag">asd</a>
-                <a href="/" class="tag">你好你好</a>
-                <a href="/" class="tag">asd</a>
-                <a href="/" class="tag">asd</a>
-                <a href="/" class="tag">iinddskjn</a>
-                <a href="/" class="tag">asd</a>
-                <a href="/" class="tag">asd</a>
-                <a href="/" class="tag">asd</a>
-                <a href="/" class="tag">asd</a>
+                <a href="/" class="tag" v-for="(tag,index) in tags" :key="index" :style="{color:randomColor()}">{{tag}}</a>
             </div>
-            <div class="right_module">
+            <div class="right_module" id="new_hot">
                 <div class="header">最近热门</div>
                 <ul class="list">
-                    <li class="item"><a href="/">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt, expedita!</a></li>
-                    <li class="item"><a href="/">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt, expedita!</a></li>
-                    <li class="item"><a href="/">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt, expedita!</a></li>
-                    <li class="item"><a href="/">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt, expedita!</a></li>
-                    <li class="item"><a href="/">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt, expedita!</a></li>
-                    <li class="item"><a href="/">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt, expedita!</a></li>
+                    <li class="item" v-for="temp in titleList" :key="temp.id"><a :href="temp.link">{{temp.title}}</a></li>
                 </ul>
             </div>
-            <div class="right_module">
+            <div class="right_module" id="new_comments">
                 <div class="header">最新评论</div>
                 <ul class="list">
-                    <li class="item">
+                    <li class="item" v-for="comment in commentList" :key="comment.id">
                         <div class="comment_message">
-                            <span class="message_user">Lorem, ipsum.</span>
-                            <span class="message_time">Lorem, ipsum dolor.</span>
+                            <span class="message_user">{{comment.name}}</span>
+                            <span class="message_time">{{comment.date}}</span>
                         </div>
-                        <p class="comment_content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, debitis.</p>
-                    </li>
-                    <li class="item">
-                        <div class="comment_message">
-                            <span class="message_user">Lorem, ipsum.</span>
-                            <span class="message_time">Lorem, ipsum dolor.</span>
-                        </div>
-                        <p class="comment_content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, debitis.</p>
-                    </li>
-                    <li class="item">
-                        <div class="comment_message">
-                            <span class="message_user">Lorem, ipsum.</span>
-                            <span class="message_time">Lorem, ipsum dolor.</span>
-                        </div>
-                        <p class="comment_content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, debitis.</p>
-                    </li>
-                    <li class="item">
-                        <div class="comment_message">
-                            <span class="message_user">Lorem, ipsum.</span>
-                            <span class="message_time">Lorem, ipsum dolor.</span>
-                        </div>
-                        <p class="comment_content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, debitis.</p>
+                        <p class="comment_content">{{comment.comment}}</p>
                     </li>
                 </ul>
             </div>
@@ -130,5 +88,7 @@
         </ul>
         <p>Lorem ipsum dolor sit amet.</p>
     </footer>
+    <script src="./js/index.js"></script>
+    <script src="./js/base.js"></script>
 </body>
 </html>
