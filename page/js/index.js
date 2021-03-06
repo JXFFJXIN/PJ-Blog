@@ -1,15 +1,21 @@
 const everyday = new Vue({
     el:"#everyday",
     data:{
-        content:"adsdsdevdffdfd",
+        content:"",
     },
     computed:{
         getContent(){
-            return this.content;
+            return this.content
         }
     },
     created(){
         // 请求数据给content赋值
+        axios({
+            url: "/queryEveryDay",
+            method: "get"
+        }).then(function(resp){
+            everyday.content = resp.data.data[0].content;
+        });
     }
 })
 

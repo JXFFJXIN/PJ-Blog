@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
     <script src="./wangEditor/wangEditor.js"></script>
-    <!-- <script src="./js/axios.js"></script> -->
+    <script src="./js/axios.js"></script>
     <link href="./wangEditor/wangEditor.css">
 
     <style>
@@ -49,16 +50,29 @@
         }
     </style>
     <script>
-        function submit() {
-            var content = document.getElementById("content").value;
+        // function submit() {
+        //     var content = document.getElementById("content").value;
 
-            // axios({
-            //     url: "/blog/addEveryDay?content=" + content,
-            //     method: "get",
-            // }).then(function (resp) {
-            //     alert(resp.data.msg);
-            // });
-            alert(content)
+        //     axios({
+        //         url: "/blog/addEveryDay?content=" + content,
+        //         method: "get",
+        //     }).then(function (resp) {
+        //         alert(resp.data.msg);
+        //     });
+        // }
+        function submit(){
+            var content = $("#content").val();
+            $.ajax({
+                url:"/editEveryDay",
+                method:"post",
+                data:content,
+                success(resp){
+                    console.log(resp);
+                },
+                error(resp){
+                    console.log(resp);
+                }
+            })
         }
     </script>
 </head>
