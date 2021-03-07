@@ -5,6 +5,7 @@
     <title>Blog | EBlog</title>
     <script src="./wangEditor/wangEditor.js"></script>
     <link href="./wangEditor/wangEditor.css">
+    <script src="./js/axios.js"></script>
 
     <style>
         * {
@@ -49,19 +50,18 @@
             let tags = document.getElementById("tags").value;
             let content = encodeURI(editor.txt.html());
             let data = {
-                title: title,
-                author: author,
-                tags: tags,
-                content: content
+                title:title,
+                author:author,
+                tags:tags,
+                content:content
             }
-            console.dir(data)
-            // axios({
-            //     url: "/blog/addBlog",
-            //     method: "post",
-            //     data: data
-            // }).then(function (resp) {
-            //     alert(resp.data);
-            // });
+            axios({
+                url: "/addBlog",
+                method: "post",
+                data: data
+            }).then(function (resp) {
+                console.log("响应成功")
+            });
 
             // var form = new FormData();
             // form.append("title", title);
