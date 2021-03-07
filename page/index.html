@@ -40,6 +40,15 @@
                     </p>
                     <div class="article_footer">发布于{{article.date}} |  浏览({{article.views}}) | Tags：{{article.tags}}</div>
                 </div>
+                <div class="page_tool">
+                    <ul>
+                        <li 
+                            v-for="tool in pageToolList"
+                            @click="changePage(tool.page)"
+                            :class="{now_page:tool.text == page}"
+                        >{{tool.text}}</li>
+                    </ul>
+                </div>
             </div>
         </div>
         <div class="content_right">

@@ -79,3 +79,32 @@
     padding: 5px 20px;
     box-sizing: border-box;
 }
+
+.page_tool{
+    margin-top: 20px;
+    display:inline-block;
+    box-shadow:3px 4px 3px #3e563b;
+}
+
+.page_tool ul li{
+    display:inline-block;
+    list-style:none;
+    width: 40px;
+    height: 30px;
+    background:#668f61;
+    line-height: 30px;
+    color: #e0f6cd;
+    text-align: center;
+    border: 1px solid #3e563b;
+    float: left;
+    cursor: pointer;
+}
+.page_tool ul li:hover{
+    color: #668f61;
+    background:#e0f6cd;
+}
+.page_tool ul li.now_page{
+    color: #668f61;
+    background:#e0f6cd;
+    cursor: default;
+}

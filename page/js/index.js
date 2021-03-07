@@ -24,21 +24,28 @@ const articleList = new Vue({
     data:{
         page:1,
         pageSize:5,
-        count:100,
+        count:1,
+        pageToolList:[],
         articleList:[
-            {
-                title:"这个是标题",
-                content:"介是内容介是内容介是内容介是内容介是内容介是内容介是内容介是内容",
-                date:"2018-01-01",
-                views:"101",
-                tags:"test1 test2",
-                id:"1",
-                link:""
-            },
+            // {
+            //     title:"这个是标题",
+            //     content:"介是内容介是内容介是内容介是内容介是内容介是内容介是内容介是内容",
+            //     date:"2018-01-01",
+            //     views:"101",
+            //     tags:"test1 test2",
+            //     id:"1",
+            //     link:""
+            // },
 
         ]
     },
     computed:{
+        changePage(){
+            return function(page){
+                this.getArticleList(page,this.pageSize);
+                this.page = page;
+            }
+        },
         getArticleList(){
             return function(page,pageSize){
                 axios({
@@ -61,11 +68,44 @@ const articleList = new Vue({
                     articleList.articleList = list;
                 }).catch(function(error){
                     console.log("请求错误"+error)
+                });
+                axios({
+                    method:"get",
+                    url:"/queryBlogCount"
+                }).then(function(resp){
+                    articleList.count = resp.data.data[0]["count(1)"]
+                    articleList.generatePageTool;
+                }).catch(function(error){
+                    console.log("请求失败")
                 })
             }
+        },
+        generatePageTool(){
+            let newPage = this.page,
+                pageSize = this.pageSize,
+                totalCount = this.count,
+                result = [];
+            result.push({text:"<<",page:1})
+            if(newPage>2){
+                result.push({text:newPage-2,page:newPage-2});
+            }
+            if(newPage>1){
+                result.push({text:newPage-1,page:newPage-1});
+            }
+            result.push({text:newPage,page:newPage});
+            if(newPage + 1<=(totalCount+pageSize-1)/pageSize){
+                result.push({text:newPage+1,page:newPage+1});
+            }
+            if(newPage + 2<=(totalCount+pageSize-1)/pageSize){
+                result.push({text:newPage+2,page:newPage+2});
+            }
+            result.push({text:">>",page:parseInt((totalCount+pageSize-1)/pageSize)})
+            this.pageToolList = result;
+            return result;
         }
     },
     created(){
         this.getArticleList(this.page,this.pageSize);
     }
 })
+

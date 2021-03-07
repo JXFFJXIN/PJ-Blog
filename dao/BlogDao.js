@@ -29,3 +29,18 @@ module.exports.queryBlogByPage = function (page, pageSize, success) {
     });
     connection.end();
 }
+
+module.exports.queryBlogCount = function (success) {
+    const sql = "select count(1) from blog ;";
+    const params = [];
+    const connection = dbUtil.createConnection();
+    connection.connect();
+    connection.query(sql, params, function (error, result) {
+        if (error) {
+            console.log(error);
+        } else {
+            success(result);
+        }
+    });
+    connection.end();
+}
