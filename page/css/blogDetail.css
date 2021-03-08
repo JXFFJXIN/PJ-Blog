@@ -18,6 +18,9 @@
     text-align: center;
     padding: 15px 0px;
     font-weight: 600;
+    word-wrap: break-word;
+    word-break: break-word;
+    overflow: hidden;
 }
 .detail_msg{
     /* background: pink; */

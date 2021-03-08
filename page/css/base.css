@@ -63,6 +63,9 @@ header {
     text-decoration: none;
     color: #b0ce95;
 }
+.menu li a:hover{
+    color: #d8ffb6;
+}
 
 .search input {
     display: inline-block;
@@ -146,6 +149,10 @@ header {
     text-decoration: none;
     color: #6a855b;
     background: #e0f6cd;
+}
+.right_module .tag:hover{
+    color: #3c5f29 !important; 
+    background: #ffffff;
 }
 .right_module .list .item{
     list-style: none;

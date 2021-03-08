@@ -85,61 +85,36 @@ const newHot = new Vue({
 const newComments = new Vue({
     el:"#new_comments",
     data:{
-        commentList:[
-            {
-                name:"用户名",
-                date:"2018-10-10",
-                comment:"这里是一堆评论，这里是一堆评论，这里是一堆评论，这里是一堆评论",
-                id:"1"
-            },
-            {
-                name:"用户名",
-                date:"2018-10-10",
-                comment:"这里是一堆评论，这里是一堆评论，这里是一堆评论，这里是一堆评论",
-                id:"2"
-            },
-            {
-                name:"用户名",
-                date:"2018-10-10",
-                comment:"这里是一堆评论，这里是一堆评论，这里是一堆评论，这里是一堆评论",
-                id:"3"
-            },
-            {
-                name:"用户名",
-                date:"2018-10-10",
-                comment:"这里是一堆评论，这里是一堆评论，这里是一堆评论，这里是一堆评论",
-                id:"4"
-            },
-            {
-                name:"用户名",
-                date:"2018-10-10",
-                comment:"这里是一堆评论，这里是一堆评论，这里是一堆评论，这里是一堆评论",
-                id:"5"
-            },
-            {
-                name:"用户名",
-                date:"2018-10-10",
-                comment:"这里是一堆评论，这里是一堆评论，这里是一堆评论，这里是一堆评论",
-                id:"6"
-            },
-            {
-                name:"用户名",
-                date:"2018-10-10",
-                comment:"这里是一堆评论，这里是一堆评论，这里是一堆评论，这里是一堆评论",
-                id:"7"
-            },
-            {
-                name:"用户名",
-                date:"2018-10-10",
-                comment:"这里是一堆评论，这里是一堆评论，这里是一堆评论，这里是一堆评论",
-                id:"8"
-            }
-        ]
+        page:1,
+        pageSize:5,
+        commentList:[]
     },
     computed:{
-
+        getCommentList(){
+            return function(page,pageSize){
+                axios({
+                    method:"get",
+                    url:`/queryCommentAll?page=${page-1}&pageSize=${pageSize}`,
+                }).then(function(resp){
+                    const result = resp.data.data;
+                    const list = [];
+                    for(let i = 0;i<result.length;i++){
+                        let temp = {};
+                        temp.name = result[i].user_name;
+                        temp.reply = result[i].parent_id;
+                        temp.id = result[i].id;
+                        temp.comment = result[i].comment;
+                        temp.date = result[i].ctime;
+                        list.push(temp);
+                    }
+                    newComments.commentList = list;
+                }).catch(function(error){
+                    console.log("请求错误"+error)
+                });
+            }
+        },
     },
     created(){
-        
+        this.getCommentList(this.page,this.pageSize)
     }
 })

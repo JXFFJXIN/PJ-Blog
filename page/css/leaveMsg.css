@@ -2,7 +2,6 @@
     background:#e0f6cd;
     color: #596e4d;
     width: 100%;
-    padding: 10px 10px;
     border-radius: 5px;
     box-sizing: border-box;
     box-shadow: 3px 4px 3px #596e4d;
@@ -15,6 +14,7 @@
     padding: 0px 0px 0px 10px;
     text-align: left;
 }
+/* blog_comment */
 .blog_comments{
     width: 100%;
 }
@@ -46,4 +46,85 @@
     padding-left: 10px;
     margin-top: 10px;
     font-size: 14px;
+}
+/* send_comment */
+.send_comment {
+    background:#e0f6cd;
+    color: #596e4d;
+    width: 100%;
+    margin-top: 15px;
+    padding: 10px 10px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    box-shadow: 3px 4px 3px #596e4d;
+    word-wrap: break-word;
+    word-break:break-word;
+    overflow: hidden;
+    text-align: left;
+}
+.send_comment span{
+    font-size: 18px;
+    font-weight: 600;
+}
+.send_comment input{
+    width: 300px;
+    height: 30px;
+    border: 1px solid #596e4d;
+    outline: none;
+    padding-left: 10px;
+    margin: 10px 0px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+.send_comment textarea{
+    width: 100%;
+    height: 100px;
+    border-radius: 5px;
+    border: 1px solid #596e4d;
+    margin-top: 10px;
+    box-sizing: border-box;
+    outline: none;
+    font-size: 14px;
+    padding: 10px;
+    
+}
+.send_comment button{
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    background: #596e4d;
+    color: #e0f6cd;
+    outline: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-weight: 500;
+    cursor: pointer;
+}
+/* page_tool */
+.page_tool{
+    margin-top: 20px;
+    display:inline-block;
+    box-shadow:3px 4px 3px #3e563b;
+}
+.page_tool ul li{
+    display:inline-block;
+    list-style:none;
+    width: 40px;
+    height: 30px;
+    background:#668f61;
+    line-height: 30px;
+    color: #e0f6cd;
+    text-align: center;
+    border: 1px solid #3e563b;
+    float: left;
+    cursor: pointer;
+}
+.page_tool ul li:hover{
+    color: #668f61;
+    background:#e0f6cd;
+}
+.page_tool ul li.now_page{
+    color: #668f61;
+    background:#e0f6cd;
+    cursor: default;
 }
