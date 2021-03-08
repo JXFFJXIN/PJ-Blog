@@ -11,6 +11,7 @@ app.get("/queryEveryDay",loader.get("/queryEveryDay"))
 app.post("/addBlog",loader.get("/addBlog"))
 app.get("/queryBlogByPage",loader.get("/queryBlogByPage"))
 app.get("/queryBlogCount",loader.get("/queryBlogCount"))
+app.get("/queryBlogById",loader.get("/queryBlogById"))
 
 app.listen(globalConfig.port,function(){
     console.log("!!!服务器已开启!!!");

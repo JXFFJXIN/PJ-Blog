@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog | About</title>
+    <title>Blog | Detail</title>
     <link rel="stylesheet" href="./css/base.css">
     <link rel="stylesheet" href="./css/leaveMsg.css">
-    <link rel="stylesheet" href="./css/about.css">
+    <link rel="stylesheet" href="./css/blogDetail.css">
     <script src="https://cdn.bootcss.com/vue/2.5.2/vue.min.js"></script>
     <script src="./js/axios.js"></script>
 </head>
 <body>
     <header>
         <div class="container">
-            <a href="/" class="title" >个人博客 | 博客相关</a>
+            <a href="/" class="title" >个人博客 | 博客内容</a>
             <ul class="menu">
                 <li><a href="/">首页</a></li>
                 <li><a href="/sitemap.html">地图</a></li>
@@ -29,19 +29,10 @@
     </header>
     <div class="content">
         <div class="content_left">
-            <div class="description">
-                <div class="about_title">关于我</div>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi tempora labore deleniti, maiores officiis alias nesciunt obcaecati impedit totam, asperiores neque officia aspernatur ab dolore provident saepe aliquam! Saepe, eveniet.</p>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi tempora labore deleniti, maiores officiis alias nesciunt obcaecati impedit totam, asperiores neque officia aspernatur ab dolore provident saepe aliquam! Saepe, eveniet.</p>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi tempora labore deleniti, maiores officiis alias nesciunt obcaecati impedit totam, asperiores neque officia aspernatur ab dolore provident saepe aliquam! Saepe, eveniet.</p>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi tempora labore deleniti, maiores officiis alias nesciunt obcaecati impedit totam, asperiores neque officia aspernatur ab dolore provident saepe aliquam! Saepe, eveniet.</p>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi tempora labore deleniti, maiores officiis alias nesciunt obcaecati impedit totam, asperiores neque officia aspernatur ab dolore provident saepe aliquam! Saepe, eveniet.</p>
-                <div class="about_title">关于博客</div>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi tempora labore deleniti, maiores officiis alias nesciunt obcaecati impedit totam, asperiores neque officia aspernatur ab dolore provident saepe aliquam! Saepe, eveniet.</p>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi tempora labore deleniti, maiores officiis alias nesciunt obcaecati impedit totam, asperiores neque officia aspernatur ab dolore provident saepe aliquam! Saepe, eveniet.</p>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi tempora labore deleniti, maiores officiis alias nesciunt obcaecati impedit totam, asperiores neque officia aspernatur ab dolore provident saepe aliquam! Saepe, eveniet.</p>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi tempora labore deleniti, maiores officiis alias nesciunt obcaecati impedit totam, asperiores neque officia aspernatur ab dolore provident saepe aliquam! Saepe, eveniet.</p>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi tempora labore deleniti, maiores officiis alias nesciunt obcaecati impedit totam, asperiores neque officia aspernatur ab dolore provident saepe aliquam! Saepe, eveniet.</p>
+            <div class="blog_detail" id="blog_detail">
+                <div class="detail_title">{{detail.title}}</div>
+                <div class="detail_msg">作者：JXFF | 标签：{{detail.tags}} | 发布于：{{detail.ctime}} | 浏览：{{detail.view}}</div>
+                <div class="detail_content" v-html="detail.content"></div>
             </div>
             <div class="blog_comments">
                 <span class="blog_comments_msg">关于：目前有61条留言</span>
@@ -118,7 +109,7 @@
         </ul>
         <p>Lorem ipsum dolor sit amet.</p>
     </footer>
-    <script src="./js/index.js"></script>
     <script src="./js/base.js"></script>
+    <script src="./js/blog_detail.js"></script>
 </body>
 </html>

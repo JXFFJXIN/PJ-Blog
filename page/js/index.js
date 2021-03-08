@@ -62,7 +62,7 @@ const articleList = new Vue({
                         temp.tags = result[i].tags;
                         temp.id = result[i].id;
                         temp.date = result[i].ctime;
-                        temp.link = ""+result[i].id;
+                        temp.link = `/blog_detail.html?bid=${result[i].id}`;
                         list.push(temp);
                     }
                     articleList.articleList = list;

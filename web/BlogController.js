@@ -59,6 +59,15 @@ function queryBlogByPage(request,response){
     });
 }
 
+function queryBlogById(request,response){
+    const params = url.parse(request.url,true).query;
+    blogDao.queryBlogById(parseInt(params.bid),function(result){
+        response.writeHead(200);
+        response.write(respUtil.writeResult("success","查询成功",result));
+        response.end();
+    })
+}
+
 function queryBlogCount(request,response){
     blogDao.queryBlogCount(function(result){
         response.writeHead(200);
@@ -70,4 +79,5 @@ function queryBlogCount(request,response){
 path.set("/addBlog",addBlog);
 path.set("/queryBlogByPage",queryBlogByPage);
 path.set("/queryBlogCount",queryBlogCount)
+path.set("/queryBlogById",queryBlogById)
 module.exports.path = path;

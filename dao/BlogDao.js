@@ -44,3 +44,18 @@ module.exports.queryBlogCount = function (success) {
     });
     connection.end();
 }
+
+module.exports.queryBlogById = function(id,success){
+const sql = "select * from blog where id = ?;";
+    const params = [id];
+    const connection = dbUtil.createConnection();
+    connection.connect();
+    connection.query(sql, params, function (error, result) {
+        if (error) {
+            console.log(error);
+        } else {
+            success(result);
+        }
+    });
+    connection.end();
+}
