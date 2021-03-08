@@ -1,9 +1,25 @@
 const commentDao = require("../dao/CommentDao");
 const timeUtil = require("../util/TimeUtil");
 const respUtil = require("../util/RespUtil");
+// 验证码逻辑：
+// 1. 安装并引入svg-captcha
+// 2. 在业务逻辑中创建随机图并返回
+// captcha.create({类css样式})
+// 3. 通过axios访问对应的地址获取随机图的data和text
+const captcha = require("svg-captcha")
 const url = require("url");
-
 const path = new Map();
+
+function queryRandomCode(request,response){
+    const img = captcha.create({
+        fontSize:50,
+        width:100,
+        height:34
+    })
+    response.writeHead(200);
+    response.write(respUtil.writeResult("success","添加成功",img));
+    response.end();
+}
 
 function addComment(request,response){
     request.on("data",function(data){
@@ -60,4 +76,5 @@ path.set("/addComment",addComment);
 path.set("/queryCommentByPage",queryCommentByPage);
 path.set("/queryCommentCount",queryCommentCount);
 path.set("/queryCommentAll",queryCommentAll);
+path.set("/queryRandomCode",queryRandomCode)
 module.exports.path = path;

@@ -5,13 +5,20 @@ const comment = new Vue({
         pageSize:5,
         count:0,
         pageToolList:[],
-        commentList:[]
+        commentList:[],
+        vcode:"",
+        vtext:"",
     },
     computed:{
         changePage(){
             return function(page){
                 this.getCommentList(page,this.pageSize);
                 this.page = page;
+            }
+        },
+        changeVcode(){
+            return function(){
+                this.getVcode();
             }
         },
         getCommentList(){
@@ -89,6 +96,13 @@ const comment = new Vue({
         },
         sendComment(){
             return function(){
+                let codeDom = document.getElementById("comment_code").value,
+                    code = codeDom?codeDom.toLowerCase():"",
+                    text = comment.vtext&&comment.vtext.toLowerCase();
+                if(code!==text){
+                    alert("请输入正确的验证码");
+                    return;
+                }
                 let searchUrlParams = location.search.indexOf("?")>-1?location.search.split("?")[1].split("$"):"",
                     bid ;
                 if(searchUrlParams == ""){
@@ -104,17 +118,17 @@ const comment = new Vue({
                         }
                     }
                 }
-                let reply = document.getElementById("comment_reply").value,
-                name = document.getElementById("comment_name").value,
-                email = document.getElementById("comment_email").value,
-                content = document.getElementById("comment_content").value,
+                let reply = document.getElementById("comment_reply").value||"-1",
+                name = document.getElementById("comment_name").value||"匿名",
+                email = document.getElementById("comment_email").value||"匿名邮箱",
+                content = document.getElementById("comment_content").value||"(空)",
                 data={
                     bid,
                     reply,
                     name,
                     email,
                     content
-                }
+                };
                 axios({
                     method:"post",
                     url:"/addComment",
@@ -125,12 +139,29 @@ const comment = new Vue({
                 }).catch((err)=>{
                     // console.log("请求失败,"+err)
                 })
+                comment.getVcode();
                 
+            }
+        },
+        getVcode(){
+            return function(){
+                axios({
+                    method:"get",
+                    url:"/queryRandomCode"
+                }).then((resp)=>{
+                    console.log(resp)
+                    const ele = resp.data.data;
+                    comment.vcode = ele.data;
+                    comment.vtext = ele.text;
+                }).catch((err)=>{
+                    console.log(err)
+                })
             }
         }
         
     },
     created(){
         this.getCommentList(this.page,this.pageSize);
+        this.getVcode()
     } 
 })
