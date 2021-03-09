@@ -65,6 +65,15 @@ function queryBlogById(request,response){
         response.writeHead(200);
         response.write(respUtil.writeResult("success","查询成功",result));
         response.end();
+        blogDao.addView(parseInt(params.bid),function(result){})
+    })
+}
+
+function queryBlogHot(request,response){
+    blogDao.queryBlogHot(function(result){
+        response.writeHead(200);
+        response.write(respUtil.writeResult("success","查询成功",result));
+        response.end();
     })
 }
 
@@ -76,8 +85,28 @@ function queryBlogCount(request,response){
     })
 }
 
+function queryBlogAll(request,response){
+    blogDao.queryBlogAll(function(result){
+        response.writeHead(200);
+        response.write(respUtil.writeResult("success","查询成功",result));
+        response.end();
+    })
+}
+
+function queryBlogByTag(request,response){
+
+}
+
+function queryBlogCountByTag(request,response){
+    
+}
+
 path.set("/addBlog",addBlog);
 path.set("/queryBlogByPage",queryBlogByPage);
 path.set("/queryBlogCount",queryBlogCount)
 path.set("/queryBlogById",queryBlogById)
+path.set("/queryBlogAll",queryBlogAll)
+path.set("/queryBlogHot",queryBlogHot)
+path.set("/queryBlogByTag",queryBlogByTag)
+path.set("/queryBlogCountByTag",queryBlogCountByTag)
 module.exports.path = path;

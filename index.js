@@ -17,6 +17,12 @@ app.get("/queryCommentByPage",loader.get("/queryCommentByPage"))
 app.get("/queryCommentCount",loader.get("/queryCommentCount"))
 app.get("/queryCommentAll",loader.get("/queryCommentAll"))
 app.get("/queryRandomCode",loader.get("/queryRandomCode"))
+app.get("/queryBlogAll",loader.get("/queryBlogAll"))
+app.get("/queryRandomTags",loader.get("/queryRandomTags"))
+app.get("/queryBlogHot",loader.get("/queryBlogHot"))
+
+app.get("/queryBlogByTag",loader.get("/queryBlogByTag"))
+app.get("/queryBlogCountByTag",loader.get("/queryBlogCountByTag"))
 
 app.listen(globalConfig.port,function(){
     console.log("!!!服务器已开启!!!");

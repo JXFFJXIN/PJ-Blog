@@ -31,10 +31,11 @@ function queryTag(tag, success) {
 }
 
 function queryAllTags(success) {
-    var sql = "select * from tags;";
+    var sql = "select * from tags ;";
     var connection = dbUtil.createConnection();
+    var params = [];
     connection.connect();
-    connection.query(sql, function (error, result) {
+    connection.query(sql,params, function (error, result) {
         if (error) {
             console.log(error);
         } else {

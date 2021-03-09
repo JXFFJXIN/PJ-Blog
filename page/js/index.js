@@ -48,36 +48,52 @@ const articleList = new Vue({
         },
         getArticleList(){
             return function(page,pageSize){
-                axios({
-                    method:"get",
-                    url:`/queryBlogByPage?page=${page-1}&pageSize=${pageSize}`,
-                }).then(function(resp){
-                    const result = resp.data.data;
-                    const list = [];
-                    for(let i = 0;i<result.length;i++){
-                        let temp = {};
-                        temp.title = result[i].title;
-                        temp.content = result[i].content;
-                        temp.views = result[i].view;
-                        temp.tags = result[i].tags;
-                        temp.id = result[i].id;
-                        temp.date = result[i].ctime;
-                        temp.link = `/blog_detail.html?bid=${result[i].id}`;
-                        list.push(temp);
+                let searchUrlParams = location.search.indexOf("?")>-1?location.search.split("?")[1].split("$"):"",
+                    tag ;
+                if(searchUrlParams == ""){
+                    axios({
+                        method:"get",
+                        url:`/queryBlogByPage?page=${page-1}&pageSize=${pageSize}`,
+                    }).then(function(resp){
+                        const result = resp.data.data;
+                        const list = [];
+                        for(let i = 0;i<result.length;i++){
+                            let temp = {};
+                            temp.title = result[i].title;
+                            temp.content = result[i].content;
+                            temp.views = result[i].view;
+                            temp.tags = result[i].tags;
+                            temp.id = result[i].id;
+                            temp.date = result[i].ctime;
+                            temp.link = `/blog_detail.html?bid=${result[i].id}`;
+                            list.push(temp);
+                        }
+                        articleList.articleList = list;
+                    }).catch(function(error){
+                        console.log("请求错误"+error)
+                    });
+                    axios({
+                        method:"get",
+                        url:"/queryBlogCount"
+                    }).then(function(resp){
+                        articleList.count = resp.data.data[0]["count(1)"]
+                        articleList.generatePageTool;
+                    }).catch(function(error){
+                        console.log("请求失败")
+                    })
+                }
+                for (let i = 0; i < searchUrlParams.length; i++) {
+                    const element = searchUrlParams[i];
+                    if(element.split("=")[0]=="tag"){
+                        try{
+                            tag = element.split("=")[1];
+                            console.log(tag)
+                        }catch(e){
+                            console.log(e)
+                        }
                     }
-                    articleList.articleList = list;
-                }).catch(function(error){
-                    console.log("请求错误"+error)
-                });
-                axios({
-                    method:"get",
-                    url:"/queryBlogCount"
-                }).then(function(resp){
-                    articleList.count = resp.data.data[0]["count(1)"]
-                    articleList.generatePageTool;
-                }).catch(function(error){
-                    console.log("请求失败")
-                })
+                }
+                
             }
         },
         generatePageTool(){

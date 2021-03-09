@@ -1,7 +1,7 @@
 const randomTags = new Vue({
     el:"#random_tags",
     data:{
-        tags:["asd","dsded","dsndifjie","sdsuncbxoi","dsdhei","dshdiushnd","sdedn","asd","dsded","dsndifjie","sdsuncbxoi","dsdhei","dshdiushnd","sdedn"]
+        tags:[]
     },
     computed:{
         randomColor(){
@@ -14,71 +14,43 @@ const randomTags = new Vue({
         }
     },
     created(){
-
+        axios({
+            method:"get",
+            url:"/queryRandomTags"
+        }).then((resp)=>{
+            const ele = resp.data.data;
+            ele.map(item=>{randomTags.tags.push(item.tag);})
+        }).catch((err)=>{
+            console.log(err)
+        })
     }
 })
 
 const newHot = new Vue({
     el:"#new_hot",
     data:{
-        titleList:[
-            {
-                title:"这是一个链接",
-                link:"http://www.baidu.com",
-                id:"1",
-            },
-            {
-                title:"这是一个链接",
-                link:"http://www.baidu.com",
-                id:"1",
-            },
-            {
-                title:"这是一个链接",
-                link:"http://www.baidu.com",
-                id:"2",
-            },
-            {
-                title:"这是一个链接",
-                link:"http://www.baidu.com",
-                id:"3",
-            },
-            {
-                title:"这是一个链接",
-                link:"http://www.baidu.com",
-                id:"4",
-            },
-            {
-                title:"这是一个链接",
-                link:"http://www.baidu.com",
-                id:"5",
-            },
-            {
-                title:"这是一个链接",
-                link:"http://www.baidu.com",
-                id:"6",
-            },
-            {
-                title:"这是一个链接",
-                link:"http://www.baidu.com",
-                id:"7",
-            },
-            {
-                title:"这是一个链接",
-                link:"http://www.baidu.com",
-                id:"8",
-            },
-            {
-                title:"这是一个链接",
-                link:"http://www.baidu.com",
-                id:"9",
-            }
-        ]
+        titleList:[]
     },
     computed:{
 
     },
     created(){
-
+        axios({
+            method:"get",
+            url:"/queryBlogHot"
+        }).then((resp)=>{
+            const ele = resp.data.data;
+            ele.map(item=>{
+                let temp = {
+                    title:item.title,
+                    link:`/blog_detail.html?bid=${item.id}`,
+                    id:item.id
+                };
+                newHot.titleList.push(temp)
+            })
+        }).catch((err)=>{
+            console.log(err)
+        })
     }
 })
 
