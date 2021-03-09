@@ -19,7 +19,7 @@ const randomTags = new Vue({
             url:"/queryRandomTags"
         }).then((resp)=>{
             const ele = resp.data.data;
-            ele.map(item=>{randomTags.tags.push(item.tag);})
+            ele.map(item=>{randomTags.tags.push({text:item.tag,link:`?tag=${item.tag}`});})
         }).catch((err)=>{
             console.log(err)
         })

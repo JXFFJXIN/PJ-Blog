@@ -50,7 +50,17 @@ const articleList = new Vue({
             return function(page,pageSize){
                 let searchUrlParams = location.search.indexOf("?")>-1?location.search.split("?")[1].split("$"):"",
                     tag ;
-                if(searchUrlParams == ""){
+                for (let i = 0; i < searchUrlParams.length; i++) {
+                    const element = searchUrlParams[i];
+                    if(element.split("=")[0]=="tag"){
+                        try{
+                            tag = element.split("=")[1];
+                        }catch(e){
+                            console.log(e)
+                        }
+                    }
+                }
+                if(!tag){
                     axios({
                         method:"get",
                         url:`/queryBlogByPage?page=${page-1}&pageSize=${pageSize}`,
@@ -81,17 +91,36 @@ const articleList = new Vue({
                     }).catch(function(error){
                         console.log("请求失败")
                     })
-                }
-                for (let i = 0; i < searchUrlParams.length; i++) {
-                    const element = searchUrlParams[i];
-                    if(element.split("=")[0]=="tag"){
-                        try{
-                            tag = element.split("=")[1];
-                            console.log(tag)
-                        }catch(e){
-                            console.log(e)
-                        }
-                    }
+                }else{
+                    axios({
+                        method:"get",
+                        url:`/queryByTag?tag=${tag}`,
+                    }).then((resp)=>{
+                        resp.data.data.map(item=>{
+                            axios({
+                                method:"get",
+                                url:`queryBlogById?bid=${item}`
+                            }).then((resp)=>{
+                                const result = resp.data.data;
+                                let temp = {};
+                                temp.title = result[0].title;
+                                temp.content = result[0].content;
+                                temp.views = result[0].view;
+                                temp.tags = result[0].tags;
+                                temp.id = result[0].id;
+                                temp.date = result[0].ctime;
+                                temp.link = `/blog_detail.html?bid=${result[0].id}`;
+                                articleList.articleList.push(temp);
+                            }).catch((err)=>{
+                                console.log(err)
+                            })
+                        })
+                        
+                        articleList.count = resp.data.data.length
+                        articleList.generatePageTool;
+                    }).catch((err)=>{
+                        console.log(err);
+                    })
                 }
                 
             }

@@ -24,22 +24,24 @@ var blogDetail = new Vue({
                 bid = element.split("=")[1];
             }
         }
-        console.log(bid)
         axios({
             method:"get",
-            url:`/queryBlogById?bid=${bid}`
-        }).then((resp)=>{
-            const element = resp.data.data[0];
-            // blogDetail.title = element.title
-            // blogDetail.id = element.id
-            // blogDetail.tags = element.tags
-            // blogDetail.ctime = element.ctime
-            // blogDetail.view = element.view
-            // blogDetail.content = element.content
-            blogDetail.detail = {...blogDetail.detail,...element}
-        }).catch((resp)=>{
-            console.log("请求失败")
+            url:`/addView?bid=${bid}`
+        }).then(resp=>{
+            axios({
+                method:"get",
+                url:`/queryBlogById?bid=${bid}`
+            }).then((resp)=>{
+                const element = resp.data.data[0];
+                blogDetail.detail = {...blogDetail.detail,...element}
+            }).catch((resp)=>{
+                console.log("请求失败")
+            })
+        }).catch((err)=>{
+            console.log(err)
         })
+        
+        
 
     }
 })
