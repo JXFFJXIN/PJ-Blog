@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+      "experimentalDecorators": true, //编译选项
+      "target": "esnext", //配置编译目标代码的版本标准
+      "module": "es6", //配置编译目标使用的模块化标准
+      "lib": ["esnext","DOM"],  // ts环境
+      "outDir": "./page/core",  // ts编译的目标文件夹路径
+      "strictNullChecks":true, // 是否严格检测空值,是的话空值不能赋值给任意类型
+      // module //设置编译结果中使用的模块化标准
+      "moduleResolution":"node", // 设置解析模块的模式
+      "noImplicitUseStrict":true, // 编译结果中不包含"use strict"
+      "removeComments":true,// 编译结果移除注释
+      "noEmitOnError":true, // 错误时不生成编译结果
+      "esModuleInterop":true,// 启动es模块化交互非es模块导出
+      "strictPropertyInitialization": true // 更加严格的检查属性初始化
+  },
+  "include": ["./src"] // ts编译的源文件夹路径
+  // "files":["./src/index.ts"] //ts编译的源文件路径
+}

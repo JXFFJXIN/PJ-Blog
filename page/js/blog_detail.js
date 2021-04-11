@@ -1,3 +1,4 @@
+
 var blogDetail = new Vue({
     el:"#blog_detail",
     data:{

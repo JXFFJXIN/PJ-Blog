@@ -1,3 +1,4 @@
+
 const everyday = new Vue({
     el:"#everyday",
     data:{
